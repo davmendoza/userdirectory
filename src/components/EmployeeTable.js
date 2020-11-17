@@ -1,6 +1,8 @@
 import React from "react";
 import EmployeeRow from "./EmployeeRow";
 
+import compareNames from "../utils/compareNames"
+
 function EmployeeTable(props) {
     return(
         <table>
@@ -9,7 +11,9 @@ function EmployeeTable(props) {
             </thead>
             <tbody>
                 {
-                    props.employees.map((employeeRecord) => 
+                    props.employees
+                    .sort(compareNames)
+                    .map((employeeRecord) => 
                     (<EmployeeRow employeeRecord={employeeRecord}/>))
                 }
              </tbody>
