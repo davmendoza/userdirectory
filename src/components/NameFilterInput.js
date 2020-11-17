@@ -1,11 +1,16 @@
 import React from "react";
-import NameSortLink from "./NameSortLink";
 
-function NameFilterInput() {
+
+function NameFilterInput(props) {
     return (
         <div>
-        <label for= "filter-input">Filter List By Name</label>
-        <input type="text" value="" name="filterInput" id ="filter-input" />
+        <label htmlFor= "filter-input">Filter List By Name</label>
+        <input 
+        type="text" 
+        value={props.filterState} 
+        onChange={props.onFilterChange}
+        name="filterInput" 
+        id ="filter-input" />
         </div>
     )
 }
