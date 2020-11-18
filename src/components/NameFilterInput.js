@@ -6,6 +6,7 @@ function NameFilterInput(props) {
         <div>
         <label htmlFor= "filter-input">Filter List By Name</label>
         <input 
+        class ="form-control"
         type="text" 
         value={props.filterState} 
         onChange={props.onFilterChange}
