@@ -7,6 +7,7 @@ import compareNames from "../utils/compareNames";
 
 function EmployeeTable(props) {
     const [filteredEmployees, setFilteredEmployees] = useState(props.employees);
+    const [sortedEmployees, setSortedEmployees] = useState(filteredEmployees);
     const [filterState, setFilterState] = useState("");
     const [sortDirection, setSortDirection] = useState(1);
 
@@ -21,22 +22,33 @@ function EmployeeTable(props) {
     }
 
     useEffect(function () {
+        console.log(filterState);
         let filteredRecords = props.employees;
+       
 
         if (filterState !== '') {
              filteredRecords = props.employees
             .filter(employeeRecord => {
-                return employeeRecord.name.first.startsWith(filterState)
-                    || employeeRecord.name.last.startsWith(filterState);
+                return employeeRecord.name.first.toLowerCase().startsWith(filterState)
+                    || employeeRecord.name.last.toLowerCase().startsWith(filterState);
+                    
 
             })
             
         }
-        filteredRecords
-                .sort(compareNames(sortDirection));
+        
 
             setFilteredEmployees(filteredRecords);
-    }, [props.employees, sortDirection, filterState]);
+    }, [props.employees, filterState]);
+
+    useEffect(function () {
+       const filteredEmployeesCopy = filteredEmployees.slice(0);
+
+       filteredEmployeesCopy.sort(compareNames(sortDirection));
+
+       setSortedEmployees(filteredEmployeesCopy);
+        
+    }, [filteredEmployees, sortDirection ])
 
     function onFilterChange(event) {
         const { value } = event.target;
@@ -59,7 +71,7 @@ function EmployeeTable(props) {
                 <tbody>
                     {
 
-                        filteredEmployees.map(employeeRecord =>
+                        sortedEmployees.map(employeeRecord =>
                             (<EmployeeRow employeeRecord={employeeRecord} key={employeeRecord.id.value} />))
                     }
                 </tbody>
