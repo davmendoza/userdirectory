@@ -6,6 +6,7 @@ import NameFilterInput from "./NameFilterInput";
 import compareNames from "../utils/compareNames";
 
 function EmployeeTable(props) {
+    const [anyone, setAnyone] = useState(props.anyone);
     const [filteredEmployees, setFilteredEmployees] = useState(props.employees);
     const [sortedEmployees, setSortedEmployees] = useState(filteredEmployees);
     const [filterState, setFilterState] = useState("");
@@ -58,6 +59,7 @@ function EmployeeTable(props) {
 
     return (
         <div>
+            {anyone}
             <br />
             <NameFilterInput filterState={filterState} onFilterChange={onFilterChange} ></NameFilterInput>
             <br />

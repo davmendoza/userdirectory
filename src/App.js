@@ -7,7 +7,7 @@ import employeeData from "./employess.json";
 
 function App() {
   return (
-     <EmployeeTable employees ={employeeData.results}/> 
+     <EmployeeTable anyone="david" employees={employeeData.results}/> 
   );
 }
 
